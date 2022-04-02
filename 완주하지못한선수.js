@@ -1,3 +1,5 @@
+// https://programmers.co.kr/learn/courses/30/lessons/42576?language=javascript
+
 function solution(participant, completion) {
     let obj = {};
     participant.forEach(player => {

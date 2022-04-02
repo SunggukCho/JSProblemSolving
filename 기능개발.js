@@ -1,3 +1,5 @@
+// https://programmers.co.kr/learn/courses/30/lessons/42586?language=javascript
+
 function solution(progresses, speeds) {
     var answer = [];
     let indicator = 0;
