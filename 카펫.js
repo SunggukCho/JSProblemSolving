@@ -10,17 +10,12 @@ function solution(brown, yellow) {
         if (totalCarpet % verticalLen === 0) {
             let horizonLen = totalCarpet/verticalLen;
             if ((horizonLen*2 + (verticalLen-2)*2 === brown) && (totalCarpet-brown === yellow)) {
-                console.log('ho', horizonLen, 'vert', verticalLen, totalCarpet, brown, yellow, horizonLen*2 + (verticalLen-2)*2)
                 answer.push(horizonLen, verticalLen);
                 break
             }
         };
         verticalLen += 1;
     }
-    console.log(answer)
-    
-    
-    
     return answer;
 }
 
