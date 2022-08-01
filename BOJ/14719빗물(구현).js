@@ -1,30 +1,18 @@
-
-// let input = require('fs').readFileSync('/dev/stdin').toString().split(/\r?\n/)
-let input = `4 8
-3 1 2 3 4 1 1 2`
-input = input.toString().split(/\r?\n/).map(a => a.split(" ").map(b => parseInt(b)))
-const [ rowAndHeight, blocks] = input;
+let input = require('fs').readFileSync('/dev/stdin').toString().split(/\r?\n/)
+input = input.map(a => a.split(" ").map(b => parseInt(b)))
+const [ rowAndHeight, blocks ] = input;
 const length = blocks.length
+let answer = 0
 
-let left = blocks[0]
-let right = 0;
-let min = Number.MAX_SAFE_INTEGER
-let answer = 0;
-
-for (let i = 1; i <length; i++) {
-  if (blocks[i] <= min) {
-    min = blocks[i]
-  } else {
-    right = blocks[i]
-  }
-  console.log(min, right)
-  if (blocks[i] < left) {
-
-    answer += left - blocks[i]
-    // console.log(i, left, blocks[i], answer)
-  } else {
-    left = blocks[i]
-    min = Number.MAX_SAFE_INTEGER
+for (let i = 1; i < length; i++) {
+  let lt = blocks.slice(0, i)
+  let rt = blocks.slice(i, length+1)
+  let leftMax = Math.max(lt.sort((a, b) => b-a)[0])
+  let rightMax = Math.max(rt.sort((a, b) => b-a)[0])
+  const current = blocks[i]
+  const smaller = Math.min(leftMax, rightMax)
+  if (current < smaller) {
+    answer += smaller-current
   }
 }
 console.log(answer)
