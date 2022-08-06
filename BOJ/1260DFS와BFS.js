@@ -1,5 +1,5 @@
 
-// let input = require('fs').readFileSync('/dev/stdin').toString().split(/\r?\n/)
+// let input = require('fs').readFileSync('/dev/stdin').toString().trim().split('\n')
 let input = require('fs').readFileSync('./file/1260.txt').toString()
 // let input = `4 5 1
 // 1 2
