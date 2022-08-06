@@ -11,25 +11,32 @@ input = `5 5 1
 input = input.trim().split('\n')
 input = input.map(a => a.split(" ").map(b => parseInt(b)))
 
-console.log(input)
-
 const [N, M, R] = input[0]
 const rest = input.slice(1,)
 let graph = Array.from({length: N+1}, ()=>[])
-graph = graph.map(a => Array.from({ length: N+1}, ()=>0))
-
 for (let i = 0; i < N; i++) {
   const [r, c] = rest[i]
-  graph[r][c] = 1
-  graph[c][r] = 1
+  graph[r].push(c)
+}
+for (let i = 0; i <= N; i++) {
+  graph[i].sort()
 }
 
-for (let i = 1; i < N+1; i++) {
-  const row = graph[i]
-  const sum = row.reduce((prev, curr) => prev + curr, 0)
-  if (sum > 0) {
-    console.log(i)
+let visited = []
+let order = Array.from({length: N+1}, () => 0)
+let index = 1;
+function DFS(v) {
+  const row = graph[v]
+  if (visited.includes(v)) {
+    return
   } else {
-    console.log(0)
+    visited.push(v)
+    order[v] = index
+    index ++
+    row.forEach(node => {
+      if (!visited.includes(node)) DFS(node)
+    })      
   }
 }
+DFS(R)
+for (let i = 1; i <= N; i++) console.log(order[i])
