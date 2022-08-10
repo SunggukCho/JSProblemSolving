@@ -1,5 +1,5 @@
-// let input = require('fs').readFileSync('/dev/stdin').toString()
-let input = require('fs').readFileSync('./file/10872.txt').toString()
+let input = require('fs').readFileSync('/dev/stdin').toString()
+// let input = require('fs').readFileSync('./file/10872.txt').toString()
 const N = parseInt(input)
 
 let memo = [1, 1]
