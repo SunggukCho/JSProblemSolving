@@ -65,8 +65,6 @@ function getAnswer () {
         }
         cards[currSize]--
         result++
-        // console.log('r, c, size, result', r, c, size, result)
-        // console.log('input', input)
       }
     }
   }
