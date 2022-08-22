@@ -1,24 +1,18 @@
 function solution(estimates, k) {
-  var answer = 0; // max
-  
-  const length = estimates.length
-  
-  let lt = 0
-  let rt = lt+k-1
-  let part = estimates.slice(0, k)
-  let sum = part.reduce((prev, curr) => prev + curr, 0)
-  answer = sum
-  while (rt < length) {
-    lt ++
-    rt ++
-    const pop = part.shift()
-    const add = part.push(estimates[rt])
-    const newSum = part.reduce((prev, curr) => prev + curr, 0)
-    if (answer < newSum) {
-      answer = newSum
-    }
+  let max = 0;
+  let sum = 0;
+  const part = estimates.slice(0, k);
+  sum = part.reduce((prev, curr) => prev + curr, 0);
+
+  for (let i = k; i < estimates.length; i++) {
+      sum -= estimates[i - k];
+      sum += estimates[i]
+
+      if (max < sum) {
+          max = sum;
+      }
   }
-  return answer;
+  return max;
 }
 
 let estimates = [5, 1, 9, 8, 10, 5]

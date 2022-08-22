@@ -8,7 +8,7 @@ function solution(card, word) {
   const hashmap = new Map();
   for (let i = 65; i < 91; i++) {
     const char = String.fromCodePoint(i)
-    hashmap.set(char, {count: 0, row: 0})
+    hashmap.set(char, { count: 0, row: 0 })
   }
   row1.forEach(r => hashmap.set(r, { count: hashmap.get(r).count+1, row: 1 }))
   row2.forEach(r => hashmap.set(r, { count: hashmap.get(r).count+1, row: 2 }))
