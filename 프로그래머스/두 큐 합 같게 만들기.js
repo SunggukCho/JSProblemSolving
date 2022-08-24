@@ -1,3 +1,5 @@
+// 2022 KAKAO INTERNSHIP
+
 function solution(queue1, queue2) {
   var answer = -1;
   let sum1 = queue1.reduce((prev, curr) => prev+curr, 0)
