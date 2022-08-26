@@ -14,9 +14,18 @@ function solution(s) {
     eight: 8,
     nine: 9,
   }
-
-
-
-
+  const keyArr = Object.keys(numMap)
+  let re = Object.assign(s)
+  for (let key of keyArr) {
+    const regex = new RegExp(`${key}`, "gi");
+    re = re.replace(regex, numMap[key])
+  }
+  answer = Number(re)
   return answer;
 }
+
+console.log(solution("one4seveneight"))
+console.log(solution("one4one4one"))
+console.log(solution("23four5six7"))
+console.log(solution("2three45sixseven"))
+console.log(solution("123"))
