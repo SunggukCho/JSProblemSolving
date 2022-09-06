@@ -5,22 +5,13 @@ function solution(citations) {
   
   for (let i = 0; i < length; i++) {
     const h = sortedCitations[i]
-    let tmp = 0;
-    for (let j = 0; j < length; j++) {
-      if (sortedCitations[j] >= h) {
-        tmp++
-      }
-    }
-    // console.log(h, tmp, length-tmp)
-    if (tmp >= h && length - tmp <= h) {
-      answer = h
-      break
+    if (i < h) {
+      answer++
     }
   }
   return answer;
 }
 
-// console.log(solution([3, 0, 6, 1, 5])) // 3
-// console.log(solution([6,5,5,5,4,3,1])) // 4
-// console.log(solution([3,3,1,1,1])) // 4
-console.log(solution([5, 4, 3, 2, 1])) // 4
+console.log(solution([3, 0, 6, 1, 5])) // 3
+console.log(solution([6,5,5,5,4,3,1])) // 4
+console.log(solution([3,3,1,1,1])) // 2
