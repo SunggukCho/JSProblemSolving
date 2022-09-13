@@ -1,4 +1,5 @@
 // 2021 KAKAO BLIND RECRUITMENT
+// 효율성실패
 
 function solution(info, query) {
   const answer = Array.from({length : query.length}, ()=>0)
@@ -8,17 +9,11 @@ function solution(info, query) {
     const [qlanguage, qstack, qcareer, qfood, qscore] = [converter("language", arr[0]), converter("stack", arr[2]), converter("career",arr[4]), converter("food", arr[6]), converter("score", arr[7])]
     info.forEach(i => {
       const [language, stack, career, food, score] = i.split(" ")
-      if (qlanguage.includes(language) && qstack.includes(stack) && qcareer.includes(career) && qfood.includes(food) && qscore >= score) {
-        console.log(idx, qlanguage, language, qstack, stack, qcareer, career, qfood, food, qscore, score)
+      if (qlanguage.includes(language) && qstack.includes(stack) && qcareer.includes(career) && qfood.includes(food) && score >= qscore) {
         answer[idx]++
       }
     })
   })
-  // info.forEach(i => {
-  //   const [language, stack, career, food, score] = i.split(" ")
-    
-  // })
-
   return answer;
 }
 
@@ -48,7 +43,7 @@ function converter(type, value) {
       if (value === "-") {
         return 1
       }
-      return value
+      return Number(value)
   }
 }
 
