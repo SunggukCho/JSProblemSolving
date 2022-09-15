@@ -1,5 +1,5 @@
 // 2021 KAKAO BLIND RECRUITMENT
-// 효율성실패
+// 효율성실패git p
 
 function solution(info, query) {
   const answer = Array.from({length : query.length}, ()=>0)
