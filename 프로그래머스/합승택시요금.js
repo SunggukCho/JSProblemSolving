@@ -11,17 +11,41 @@ function solution(n, s, a, b, fares) {
   const visited = Array.from({length: n+1}, ()=>0)
   const sum = (args) => args.reduce((prev,curr) => prev+curr, 0)
   let minNum = Number.MAX_SAFE_INTEGER;
+  const paths = [s]
   
-
-  function DFS(v, visited){
-    if (visited[a] !== 0 && visited[b] !== 0) {
-
+  // console.log(matrix)
+  function DFS(v, visited, paths){
+    if (v === a || v === b) {
+      if (visited[a] !== 0 && visited[b] !== 0) {
+        if (minNum > sum(visited)) {
+          minNum = sum(visited)
+          console.log('!?!?',paths, visited)
+        }
+        return
+      } else {
+        paths.pop()
+        return
+        // DFS(v, visited, paths)
+      }
     } else {
-
+      for (let i = 1; i <= n; i++) {
+        if (matrix[v][i] !== 0 && visited[i] === 0) {
+          visited[v] = matrix[v][i]
+          paths.push(i)
+          console.log(v, i, paths)
+          DFS(i, visited, paths)
+          // if (visited[a] !== 0 && visited[b] !== 0) {
+          //   minNum = Math.min(minNum, sum(visited))
+          //   console.log("!!!", minNum, sum(visited))
+          //   return
+          // } else {
+        }
+      }
     }
   }
-
-
+  DFS(s, visited, paths)
+  console.log('min num: ', minNum)
+  console.log('paths: ', paths)
   return answer;
 }
 
