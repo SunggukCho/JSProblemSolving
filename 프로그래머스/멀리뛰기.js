@@ -8,7 +8,6 @@ function solution(n) {
       memo[i] = (memo[i-1]+memo[i-2]) % 1234567
     }
   }
-  console.log(memo)
   return memo[n] ;
 }
 
