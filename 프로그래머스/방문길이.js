@@ -1,33 +1,37 @@
 function solution(dirs) {
-  var answer = 0;
-  const board = Array.from({ length: 11}, ()=> Array.from({length: 11}, ()=>0))
-  const queue = [5, 5]
+  const move = ([x, y], dir) => {
+    let next = [x, y];
+    if (dir === 'U') next = [x, y + 1];
+    if (dir === 'D') next = [x, y - 1];
+    if (dir === 'R') next = [x + 1, y];
+    if (dir === 'L') next = [x - 1, y];
+    if (Math.abs(next[0]) > 5 || Math.abs(next[1]) > 5) return [x, y];
+    return next;
+  };
 
-  for (let i = 0; i < dirs.length; i++) {
-    const [currX, currY] = queue.shift()
-    move(dirs[i], [currX, currY])
-  }
+  const isSameRoute = ([s1, e1], [s2, e2]) => {
+    const isSamePoint = ([x1, y1], [x2, y2]) => x1 === x2 && y1 === y2;
+    return (isSamePoint(s1, s2) && isSamePoint(e1, e2)) || (isSamePoint(s1, e2) && isSamePoint(s2, e1));
+  };
 
-  return answer;
-}
+  const trace = {
+    visited: [],
+    visit(start, end) {
+      if (start[0] === end[0] && start[1] === end[1]) return;
+      if (!this.visited.find(route => isSameRoute(route, [start, end]))) this.visited.push([start, end]);
+    },
+  };
 
-function move(dir, curr) {
-  const direction = {
-    "L": [0, -1],
-    "R": [0, 1],
-    "U": [-1, 0],
-    "D": [1, 0],
-  }
-  const [x, y] = curr;
-  const nx = x+direction[dir][0];
-  const ny = y+direction[dir][1];
-  const obj = {
-    x: [x, nx].sort((a, b) => a-b),
-    y: [y, ny].sort((a, b) => a-b)
-  }
+  let current = [0, 0];
 
-  return obj
+  dirs.split('').forEach(dir => {
+    const next = move(current, dir);
+    trace.visit(current, next);
+    current = next;
+  });
+
+  return trace.visited.length;
 }
 
 console.log(solution("ULURRDLLU")) // 7
-console.log(solution("LULLLLLLU")) // 7
+// console.log(solution("LULLLLLLU")) // 7
